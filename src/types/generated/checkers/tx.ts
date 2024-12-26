@@ -2,7 +2,7 @@
 import Long from "long";
 import _m0 from "protobufjs/minimal";
 
-export const protobufPackage = "b9lab.checkers.checkers";
+export const protobufPackage = "igor-sikachyna.checkers.checkers";
 
 export interface MsgCreateGame {
   creator: string;
@@ -395,7 +395,7 @@ export class MsgClientImpl implements Msg {
   CreateGame(request: MsgCreateGame): Promise<MsgCreateGameResponse> {
     const data = MsgCreateGame.encode(request).finish();
     const promise = this.rpc.request(
-      "b9lab.checkers.checkers.Msg",
+      "igor-sikachyna.checkers.checkers.Msg",
       "CreateGame",
       data
     );
@@ -407,7 +407,7 @@ export class MsgClientImpl implements Msg {
   PlayMove(request: MsgPlayMove): Promise<MsgPlayMoveResponse> {
     const data = MsgPlayMove.encode(request).finish();
     const promise = this.rpc.request(
-      "b9lab.checkers.checkers.Msg",
+      "igor-sikachyna.checkers.checkers.Msg",
       "PlayMove",
       data
     );
