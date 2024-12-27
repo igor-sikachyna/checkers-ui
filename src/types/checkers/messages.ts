@@ -6,10 +6,10 @@ import {
     MsgPlayMoveResponse,
 } from "../generated/checkers/tx"
 
-export const typeUrlMsgCreateGame = "/igor-sikachyna.checkers.checkers.MsgCreateGame"
-export const typeUrlMsgCreateGameResponse = "/igor-sikachyna.checkers.checkers.MsgCreateGameResponse"
-export const typeUrlMsgPlayMove = "/igor-sikachyna.checkers.checkers.MsgPlayMove"
-export const typeUrlMsgPlayMoveResponse = "/igor-sikachyna.checkers.checkers.MsgPlayMoveResponse"
+export const typeUrlMsgCreateGame = "/checkers.checkers.MsgCreateGame"
+export const typeUrlMsgCreateGameResponse = "/checkers.checkers.MsgCreateGameResponse"
+export const typeUrlMsgPlayMove = "/checkers.checkers.MsgPlayMove"
+export const typeUrlMsgPlayMoveResponse = "/checkers.checkers.MsgPlayMoveResponse"
 
 export const checkersTypes: ReadonlyArray<[string, GeneratedType]> = [
     [typeUrlMsgCreateGame, MsgCreateGame],
@@ -19,7 +19,7 @@ export const checkersTypes: ReadonlyArray<[string, GeneratedType]> = [
 ]
 
 export interface MsgCreateGameEncodeObject extends EncodeObject {
-    readonly typeUrl: "/igor-sikachyna.checkers.checkers.MsgCreateGame"
+    readonly typeUrl: "/checkers.checkers.MsgCreateGame"
     readonly value: Partial<MsgCreateGame>
 }
 
@@ -30,7 +30,7 @@ export function isMsgCreateGameEncodeObject(
 }
 
 export interface MsgCreateGameResponseEncodeObject extends EncodeObject {
-    readonly typeUrl: "/igor-sikachyna.checkers.checkers.MsgCreateGameResponse"
+    readonly typeUrl: "/checkers.checkers.MsgCreateGameResponse"
     readonly value: Partial<MsgCreateGameResponse>
 }
 
@@ -41,7 +41,7 @@ export function isMsgCreateGameResponseEncodeObject(
 }
 
 export interface MsgPlayMoveEncodeObject extends EncodeObject {
-    readonly typeUrl: "/igor-sikachyna.checkers.checkers.MsgPlayMove"
+    readonly typeUrl: "/checkers.checkers.MsgPlayMove"
     readonly value: Partial<MsgPlayMove>
 }
 
@@ -52,7 +52,7 @@ export function isMsgPlayMoveEncodeObject(
 }
 
 export interface MsgPlayMoveResponseEncodeObject extends EncodeObject {
-    readonly typeUrl: "/igor-sikachyna.checkers.checkers.MsgPlayMoveResponse"
+    readonly typeUrl: "/checkers.checkers.MsgPlayMoveResponse"
     readonly value: Partial<MsgPlayMoveResponse>
 }
 
