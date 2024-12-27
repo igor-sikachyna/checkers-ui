@@ -1,4 +1,5 @@
-import { Attribute, Event, Log } from "@cosmjs/stargate/build/logs"
+import { Attribute, Event } from "@cosmjs/stargate/build/events"
+import { Log } from "@cosmjs/stargate/build/logs"
 import { GamePiece, Pos } from "./player"
 
 export type GameCreatedEvent = Event

@@ -22,7 +22,7 @@
         "url": "https://github.com/cosmos/academy-checkers-ui/issues"
     },
     "dependencies": {
-        "@cosmjs/stargate": "0.28.11",
+        "@cosmjs/stargate": "0.32.4",
         "bootstrap": "5.1.3",
         "express": "4.18.1",
         "jquery": "3.3.1",
