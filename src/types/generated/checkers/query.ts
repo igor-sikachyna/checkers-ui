@@ -770,7 +770,7 @@ export class QueryClientImpl implements Query {
   Params(request: QueryParamsRequest): Promise<QueryParamsResponse> {
     const data = QueryParamsRequest.encode(request).finish();
     const promise = this.rpc.request(
-      "igor-sikachyna.checkers.checkers.Query",
+      "checkers.checkers.Query",
       "Params",
       data
     );
@@ -784,7 +784,7 @@ export class QueryClientImpl implements Query {
   ): Promise<QueryGetSystemInfoResponse> {
     const data = QueryGetSystemInfoRequest.encode(request).finish();
     const promise = this.rpc.request(
-      "igor-sikachyna.checkers.checkers.Query",
+      "checkers.checkers.Query",
       "SystemInfo",
       data
     );
@@ -798,7 +798,7 @@ export class QueryClientImpl implements Query {
   ): Promise<QueryGetStoredGameResponse> {
     const data = QueryGetStoredGameRequest.encode(request).finish();
     const promise = this.rpc.request(
-      "igor-sikachyna.checkers.checkers.Query",
+      "checkers.checkers.Query",
       "StoredGame",
       data
     );
@@ -812,7 +812,7 @@ export class QueryClientImpl implements Query {
   ): Promise<QueryAllStoredGameResponse> {
     const data = QueryAllStoredGameRequest.encode(request).finish();
     const promise = this.rpc.request(
-      "igor-sikachyna.checkers.checkers.Query",
+      "checkers.checkers.Query",
       "StoredGameAll",
       data
     );
@@ -826,7 +826,7 @@ export class QueryClientImpl implements Query {
   ): Promise<QueryCanPlayMoveResponse> {
     const data = QueryCanPlayMoveRequest.encode(request).finish();
     const promise = this.rpc.request(
-      "igor-sikachyna.checkers.checkers.Query",
+      "checkers.checkers.Query",
       "CanPlayMove",
       data
     );
