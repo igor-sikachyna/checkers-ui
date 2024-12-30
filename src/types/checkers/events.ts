@@ -1,19 +1,26 @@
 import { Attribute, Event } from "@cosmjs/stargate/build/events"
-import { Log } from "@cosmjs/stargate/build/logs"
 import { GamePiece, Pos } from "./player"
+import { DeliverTxResponse } from "@cosmjs/stargate"
 
 export type GameCreatedEvent = Event
 
-export const getCreateGameEvent = (log: Log): GameCreatedEvent | undefined =>
-    log.events?.find((event: Event) => event.type === "new-game-created")
+export const getCreateGameEvent = (response: DeliverTxResponse): GameCreatedEvent | undefined =>
+    response.events.find((event: Event) => event.type === "new-game-created")
 
 export const getCreatedGameId = (createdGameEvent: GameCreatedEvent): string =>
     createdGameEvent.attributes.find((attribute: Attribute) => attribute.key == "game-index")!.value
 
 export type MovePlayedEvent = Event
 
-export const getMovePlayedEvent = (log: Log): MovePlayedEvent | undefined =>
-    log.events?.find((event: Event) => event.type === "move-played")
+export const getMovePlayedEvents = (response: DeliverTxResponse): MovePlayedEvent[] => {
+    const result: MovePlayedEvent[] = [];
+    for (let e of response.events) {
+        if (e.type === "move-played") {
+            result.push(e);
+        }
+    }
+    return result;
+}
 
 export const getCapturedPos = (movePlayedEvent: MovePlayedEvent): Pos | undefined => {
     const x: number = parseInt(

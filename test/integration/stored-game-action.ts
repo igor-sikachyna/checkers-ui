@@ -1,7 +1,6 @@
 import { toHex } from "@cosmjs/encoding"
 import { OfflineDirectSigner } from "@cosmjs/proto-signing"
 import { Account, DeliverTxResponse, GasPrice } from "@cosmjs/stargate"
-import { Log } from "@cosmjs/stargate/build/logs"
 import { BroadcastTxSyncResponse } from "@cosmjs/tendermint-rpc"
 import { expect } from "chai"
 import { TxRaw } from "cosmjs-types/cosmos/tx/v1beta1/tx"
@@ -15,7 +14,7 @@ import {
     getCapturedPos,
     getCreatedGameId,
     getCreateGameEvent,
-    getMovePlayedEvent,
+    getMovePlayedEvents,
     getWinner,
 } from "../../src/types/checkers/events"
 import { typeUrlMsgPlayMove } from "../../src/types/checkers/messages"
@@ -98,9 +97,13 @@ describe("StoredGame Action", function () {
             Long.fromNumber(1),
             "auto",
         )
-        const logs: Log[] = JSON.parse(response.rawLog!)
-        expect(logs).to.be.length(1)
-        gameId = getCreatedGameId(getCreateGameEvent(logs[0])!)
+        // console.log(JSON.stringify(response, (key, value) =>
+        //     typeof value === 'bigint'
+        //         ? value.toString()
+        //         : value // return everything else unchanged
+        // , 4));
+        expect(response.events).to.be.length(5)
+        gameId = getCreatedGameId(getCreateGameEvent(response)!)
         const game: StoredGame = (await checkers.getStoredGame(gameId))!
         expect(game).to.include({
             index: gameId,
@@ -238,13 +241,13 @@ describe("StoredGame Action", function () {
             ],
             "auto",
         )
-        const logs: Log[] = JSON.parse(response.rawLog!)
-        expect(logs).to.be.length(2)
-        expect(getCapturedPos(getMovePlayedEvent(logs[0])!)).to.deep.equal({
+        expect(response.events).to.be.length(7)
+        const moveEvents = getMovePlayedEvents(response);
+        expect(getCapturedPos(moveEvents[0])).to.deep.equal({
             x: 3,
             y: 6,
         })
-        expect(getCapturedPos(getMovePlayedEvent(logs[1])!)).to.deep.equal({
+        expect(getCapturedPos(moveEvents[1])).to.deep.equal({
             x: 3,
             y: 4,
         })
@@ -309,9 +312,8 @@ describe("StoredGame Action", function () {
         expect(parseInt((await client.getBalance(alice, "token")).amount, 10)).to.be.equal(aliceBalBefore + 2)
         expect(parseInt((await client.getBalance(bob, "token")).amount, 10)).to.be.equal(bobBalBefore)
 
-        const logs: Log[] = JSON.parse(lastDeliver.rawLog!)
-        expect(logs).to.be.length(1)
-        const winner: GamePiece = getWinner(getMovePlayedEvent(logs[0])!)!
+        expect(lastDeliver.events).to.be.length(9)
+        const winner: GamePiece = getWinner(getMovePlayedEvents(lastDeliver)[0])!
         expect(winner).to.be.equal("b")
         const game: StoredGame = (await checkers.getStoredGame(gameId))!
         expect(game).to.include({
