@@ -1,5 +1,5 @@
 import { QueryClient, StargateClient, StargateClientOptions } from "@cosmjs/stargate"
-import { BroadcastTxSyncResponse, Tendermint34Client } from "@cosmjs/tendermint-rpc"
+import { BroadcastTxSyncResponse, Tendermint37Client } from "@cosmjs/tendermint-rpc"
 import { CheckersExtension, setupCheckersExtension } from "./modules/checkers/queries"
 
 export class CheckersStargateClient extends StargateClient {
@@ -9,11 +9,11 @@ export class CheckersStargateClient extends StargateClient {
         endpoint: string,
         options?: StargateClientOptions,
     ): Promise<CheckersStargateClient> {
-        const tmClient = await Tendermint34Client.connect(endpoint)
+        const tmClient = await Tendermint37Client.connect(endpoint)
         return new CheckersStargateClient(tmClient, options)
     }
 
-    protected constructor(tmClient: Tendermint34Client | undefined, options: StargateClientOptions = {}) {
+    protected constructor(tmClient: Tendermint37Client | undefined, options: StargateClientOptions = {}) {
         super(tmClient, options)
         if (tmClient) {
             this.checkersQueryClient = QueryClient.withExtensions(tmClient, setupCheckersExtension)

@@ -7,7 +7,7 @@ import {
     SigningStargateClientOptions,
     StdFee,
 } from "@cosmjs/stargate"
-import { Tendermint34Client } from "@cosmjs/tendermint-rpc"
+import { Tendermint37Client } from "@cosmjs/tendermint-rpc"
 import Long from "long"
 import { CheckersExtension, setupCheckersExtension } from "./modules/checkers/queries"
 import {
@@ -36,7 +36,7 @@ export class CheckersSigningStargateClient extends SigningStargateClient {
         signer: OfflineSigner,
         options: SigningStargateClientOptions = {},
     ): Promise<CheckersSigningStargateClient> {
-        const tmClient = await Tendermint34Client.connect(endpoint)
+        const tmClient = await Tendermint37Client.connect(endpoint)
         return new CheckersSigningStargateClient(tmClient, signer, {
             registry: createDefaultRegistry(),
             ...options,
@@ -44,7 +44,7 @@ export class CheckersSigningStargateClient extends SigningStargateClient {
     }
 
     protected constructor(
-        tmClient: Tendermint34Client | undefined,
+        tmClient: Tendermint37Client | undefined,
         signer: OfflineSigner,
         options: SigningStargateClientOptions,
     ) {

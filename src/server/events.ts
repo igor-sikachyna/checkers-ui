@@ -1,5 +1,4 @@
-import { fromUtf8 } from "@cosmjs/encoding"
-import { Attribute as TendermintAttribute, Event } from "@cosmjs/tendermint-rpc"
+import { EventAttribute as TendermintAttribute, Event } from "@cosmjs/tendermint-rpc/build/tendermint37/responses"
 import { Attribute, StringEvent } from "cosmjs-types/cosmos/base/abci/v1beta1/abci"
 
 export const convertTendermintEvents = (events: readonly Event[]): StringEvent[] => {
@@ -8,8 +7,8 @@ export const convertTendermintEvents = (events: readonly Event[]): StringEvent[]
             type: event.type,
             attributes: event.attributes.map(
                 (attribute: TendermintAttribute): Attribute => ({
-                    key: fromUtf8(attribute.key),
-                    value: fromUtf8(attribute.value),
+                    key: attribute.key,
+                    value: attribute.value,
                 }),
             ),
         }),
